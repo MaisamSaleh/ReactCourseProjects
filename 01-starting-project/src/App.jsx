@@ -4,6 +4,10 @@ import CoreConcept from "./components/CoreConcepts/CoreConcepts.jsx";
 import TabButton  from "./components/TabButton.jsx";
 
 function App() {
+  function selectHandler(selectedButton){
+    console.log(selectedButton);
+  }
+
   return (
     <div>
       <Header />
@@ -20,10 +24,10 @@ function App() {
         <section id = "examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton>Components</TabButton>
-            <TabButton>JSX</TabButton>
-            <TabButton>Props</TabButton>
-            <TabButton>State</TabButton>
+            <TabButton onSelect={()=> selectHandler('Components')}>Components</TabButton>
+            <TabButton onSelect={()=> selectHandler('JSX')}>JSX</TabButton>
+            <TabButton onSelect={()=> selectHandler('Props')}>Props</TabButton>
+            <TabButton onSelect={()=> selectHandler('State')}>State</TabButton>
           </menu>
         </section>
       </main>
