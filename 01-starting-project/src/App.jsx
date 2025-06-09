@@ -21,19 +21,18 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConcept {...CORE_CONCEPTS[0]} />
-            <CoreConcept {...CORE_CONCEPTS[1]} />
-            <CoreConcept {...CORE_CONCEPTS[2]} />
-            <CoreConcept {...CORE_CONCEPTS[3]} />
+            {CORE_CONCEPTS.map((conceptItem) => (
+              <CoreConcept key={conceptItem.title} {...conceptItem}/>
+            ))}
           </ul>
         </section>
         <section id = "examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={()=> selectHandler('components')}>Components</TabButton>
-            <TabButton onSelect={()=> selectHandler('jsx')}>JSX</TabButton>
-            <TabButton onSelect={()=> selectHandler('props')}>Props</TabButton>
-            <TabButton onSelect={()=> selectHandler('state')}>State</TabButton>
+            <TabButton isSelect={selectedTopic==='components'} onSelect={()=> selectHandler('components')}>Components</TabButton>
+            <TabButton isSelect={selectedTopic==='jsx'} onSelect={()=> selectHandler('jsx')}>JSX</TabButton>
+            <TabButton isSelect={selectedTopic==='props'} onSelect={()=> selectHandler('props')}>Props</TabButton>
+            <TabButton isSelect={selectedTopic==='state'} onSelect={()=> selectHandler('state')}>State</TabButton>
           </menu>
           { !selectedTopic? <p>Please select a topic!</p> : null}
           { selectedTopic? (<div id="tab-content">
