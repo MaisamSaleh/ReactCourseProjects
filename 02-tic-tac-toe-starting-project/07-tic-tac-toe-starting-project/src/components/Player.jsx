@@ -2,7 +2,7 @@ import { useActionState } from "react";
 import { use } from "react";
 import { useState } from "react";
 
-export default function Player({initialName , symbol , isActive}){
+export default function Player({ initialName , symbol , isActive, onChange }){
     const [ isEditing, setIsEditing ] = useState(false);
     const [ newName , setNewName ] = useState(initialName);
 
@@ -12,6 +12,9 @@ export default function Player({initialName , symbol , isActive}){
 
     function inputChangeHandler(event){
         setNewName(event.target.value);
+
+        if(isEditing)
+            onChange(symbol, playerName);
     }
 
     let playerName = <span className="player-name">{initialName}</span>;
