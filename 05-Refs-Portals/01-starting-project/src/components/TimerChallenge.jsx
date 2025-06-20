@@ -7,17 +7,12 @@ export default function TimerChallenge({ title, targetTime }){
     const [ timerStarted, setTimerStarted ] = useState(false);
     const [ timerExpired, setTimerExpired ] = useState(false);
 
-    function showPoppup(){
-        if(timerExpired){
-            dialog.current.showModal();
-        }
-        console.log(timerExpired)
-    }
-
     async function handleStart(){
         setTimerStarted(true);
         timer.current = setTimeout(() => {
             setTimerExpired(true);
+            console.log(timerExpired)
+            dialog.current.open();
         }, targetTime * 1000);
     }
 
@@ -34,7 +29,7 @@ export default function TimerChallenge({ title, targetTime }){
                     {targetTime} second{targetTime>1 ? 's' : ''}
                 </p>
                 <p>
-                    <button onClick={timerStarted ? handleStop : async ()=>{ await handleStart(); showPoppup;}}>
+                    <button onClick={timerStarted ? handleStop : handleStart}>
                         {timerStarted ? 'Stop' : 'Start'} Challenge 
                     </button>
                 </p>
