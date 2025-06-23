@@ -19,12 +19,18 @@ function App() {
   }
 
   function handleAddProject(projectData){
+    const projectId = Math.random();
+
     setProjectState((prevState)=>{
       const newProject = {
         ...projectData,
-        id: Math.random()
+        id: projectId
       };
-      return [...prevState.projects , newProject];
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects : [...prevState.projects, newProject],
+      };
     })
   }
 
@@ -34,12 +40,10 @@ function App() {
   }else if(projectState.selectedProjectId === undefined){
     content = <NoProjectSelected onStartAddProject={handleStartAddPoject} />
   }
-  
-  console.log(projectState);
 
   return (
     <main className='h-screen my-8 flex py-8'>
-      <ProjectSidebar onStartAddProject={handleStartAddPoject} />
+      <ProjectSidebar onStartAddProject={handleStartAddPoject} projects={projectState.projects} />
       {content}
     </main>
   );
