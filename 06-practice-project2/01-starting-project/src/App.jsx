@@ -3,8 +3,6 @@ import NewProject from './components/NewProject.jsx';
 import NoProjectSelected from './components/NoProjectSelected.jsx';
 import ProjectSidebar from './components/ProjectSidebar.jsx'
 import SelectedProject from './components/SelectedProject.jsx';
-import NewTask from './components/NewTask.jsx';
-import Tasks from './components/Tasks.jsx';
 
 function App() {
   const [ projectState, setProjectState ] = useState({
@@ -28,8 +26,13 @@ function App() {
     })
   }
 
-  function handleDeleteTask(){
-
+  function handleDeleteTask(id){
+    setProjectState((prevState)=>{
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task)=> task.id !== id)
+      }
+    })
   }
 
   function handleStartAddPoject(){
@@ -102,7 +105,13 @@ function App() {
 
   return (
     <main className='h-screen my-8 flex py-8'>
-      <ProjectSidebar onSelectProject={handleSelectProject} selectedProjectId={projectState.selectedProjectId} onStartAddProject={handleStartAddPoject} projects={projectState.projects} />
+      <ProjectSidebar 
+        onSelectProject={handleSelectProject} 
+        selectedProjectId={projectState.selectedProjectId} 
+        onStartAddProject={handleStartAddPoject} 
+        projects={projectState.projects} 
+      />
+
       {content}
     </main>
   );
